@@ -1,0 +1,36 @@
+@media screen and (max-width:560px) {
+  .content h1 {
+    font-size: 3rem;
+  }
+
+  .header {
+    &__text {
+      font-size: 16px;
+    }
+  }
+
+  .temperature {
+    &--h2 {
+      font-size: 48px;
+      margin: 0;
+    }
+  }
+
+  .forecast__image {
+    width: 20vw;
+  }
+
+  .weather__image {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width:360px) {
+  .humidity {
+    width: 250px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+}
