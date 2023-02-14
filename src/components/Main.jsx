@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './sass/_base.scss';
 import './sass/_layout.scss';
 import './sass/_media.scss';
@@ -9,23 +10,34 @@ import './sass/_section.scss';
 import './sass/_typography.scss';
 import './sass/_weather.scss';
 
+import drops from '../assets/images/drops.svg';
+import forecast1 from '../assets/images/forecast1.svg';
+import forecast2 from '../assets/images/forecast2.svg';
+import forecast3 from '../assets/images/forecast3.svg';
+import rain_sm from '../assets/images/rain_sm.svg';
+import sun_cloud from '../assets/images/sun_cloud.svg';
+import suncloud from '../assets/images/suncloud.svg';
+import temp_sm from '../assets/images/temp_sm.svg';
+import wind_sm from '../assets/images/wind_sm.svg';
+import tornado from '../assets/images/tornado.svg';
+import thunder from '../assets/images/thunder.svg';
+
 class Main extends Component {
   constructor() {
     super();
     this.state = {
-      backgroundColor: '#ffff',
+      themeClass: '',
       date: '',
       text: ''
     };
-
   }
   handleTime = (time) => {
     let hours = time.getHours();
-    if (hours < 16) {
-      this.setState({ backgroundColor: '#29B2DD' });
-    } else {
-      this.setState({ backgroundColor: '#08244F' });
+    const THEME = {
+      LIGHT: 'day',
+      DARK: 'night'
     }
+    this.setState({ themeClass: hours < 16 ? THEME.LIGHT : THEME.DARK })
   }
   componentDidMount() {
     this.handleTime(new Date());
@@ -49,18 +61,13 @@ class Main extends Component {
       hour += 1;
       hour %= 24;
     });
-
     this.setState({
       text: hour
     })
   }
   render() {
-
-
-
-
     return (
-      <div className='app' style={{ backgroundColor: this.state.backgroundColor }}>
+      <div className={this.state.themeClass}>
         <div className="header">
           <div className="title">
             <div className="content">
@@ -79,11 +86,11 @@ class Main extends Component {
           </div>
           <div className="menu">
             <div className="dropdown__menu">
-              <a><i className="fa-solid fa-location-dot"></i>&nbsp; Fortaleza &emsp; <i class="fa-solid fa-angle-down"></i></a>
+              <a href='/' className='city'><i className="fa-solid fa-location-dot"></i>&nbsp; Fortaleza &emsp; <i className="fa-solid fa-angle-down"></i></a>
               <div className="dropdown__content">
-                <a href="#">Kyiv</a>
-                <a href="#">Warsaw</a>
-                <a href="#"><i className="fa-solid fa-plus"></i> Add a location</a>
+                <a href="/">Kyiv</a>
+                <a href="/">Warsaw</a>
+                <a href="/"><i className="fa-solid fa-plus"></i> Add a location</a>
               </div>
             </div>
             <div className="notification">
@@ -93,21 +100,21 @@ class Main extends Component {
         </div>
         <section className="weather">
           <div className="weather__block">
-            <img src="img/suncloud.svg" className="weather__image" alt="sun-cloud" />
+            <img src={suncloud} className="weather__image" alt="sun-cloud" />
             <h2 className="temperature--h2">28°</h2>
             <h4 className="temperature--h4">Precipitations <br />
               Max.: 31° Min.: 25°</h4>
             <div className="humidity">
               <div className="humidity__option">
-                <img src="img/rain_sm.svg" alt="rain" />
+                <img src={rain_sm} alt="rain" />
                 6%
               </div>
               <div className="humidity__option">
-                <img src="img/temp_sm.svg" alt="thermometer" />
+                <img src={temp_sm} alt="thermometer" />
                 90%
               </div>
               <div className="humidity__option">
-                <img src="img/wind_sm.svg" alt="wind" />
+                <img src={wind_sm} alt="wind" />
                 19km/h
               </div>
             </div>
@@ -123,22 +130,22 @@ class Main extends Component {
                   <div className="forecast__hours">
                     <div className="forecast__hour focus">
                       <h4 className="temperature--h4 shadow">29°C</h4>
-                      <img src="img/forecast2.svg" className="forecast__image" alt="sun-cloud" />
+                      <img src={forecast2} className="forecast__image" alt="sun-cloud" />
                       <h4 className="temperature--h4 shadow time"></h4>
                     </div>
                     <div className="forecast__hour">
                       <h4 className="temperature--h4 shadow">26°C</h4>
-                      <img src="img/forecast2.svg" className="forecast__image" alt="sun-cloud" />
+                      <img src={forecast2} className="forecast__image" alt="sun-cloud" />
                       <h4 className="temperature--h4 shadow time"></h4>
                     </div>
                     <div className="forecast__hour">
                       <h4 className="temperature--h4 shadow">24°C</h4>
-                      <img src="img/forecast1.svg" className="forecast__image" alt="cloud" />
+                      <img src={forecast1} className="forecast__image" alt="cloud" />
                       <h4 className="temperature--h4 shadow time"></h4>
                     </div>
                     <div className="forecast__hour">
                       <h4 className="temperature--h4 shadow">23°C</h4>
-                      <img src="img/forecast3.svg" className="forecast__image" alt="mooon" />
+                      <img src={forecast3} className="forecast__image" alt="mooon" />
                       <h4 className="temperature--h4 shadow time"></h4>
                     </div>
                   </div>
@@ -153,19 +160,19 @@ class Main extends Component {
                   <div className="forecast__days scroll">
                     <div className="forecast__day">
                       <p>Monday</p>
-                      <img src="img/drops.svg" alt="rain" />
+                      <img src={drops} alt="rain" />
                       <div className="t">
                         <div className="t">13
                           <p className="celsius">°C</p>
                         </div>
-                        <div clasNames="t dark">10
+                        <div className="t dark">10
                           <p className="celsius">°C</p>
                         </div>
                       </div>
                     </div>
                     <div className="forecast__day">
                       <p>Tuesday</p>
-                      <img src="img/thunder.svg" alt="thunder" />
+                      <img src={thunder} alt="thunder" />
                       <div className="t">
                         <div className="t">17
                           <p className="celsius">°C</p>
@@ -177,7 +184,7 @@ class Main extends Component {
                     </div>
                     <div className="forecast__day">
                       <p>Wednesday</p>
-                      <img src="img/tornado.svg" className="margin--left" alt=" tornado" />
+                      <img src={tornado} className="margin--left" alt=" tornado" />
                       <div className="t">
                         <div className="t">19
                           <p className="celsius">°C</p>
@@ -189,7 +196,7 @@ class Main extends Component {
                     </div>
                     <div className="forecast__day">
                       <p>Thursday</p>
-                      <img src="img/sun_cloud.svg" alt="sun-cloud" />
+                      <img src={sun_cloud} alt="sun-cloud" />
                       <div className="t">
                         <div className="t">13
                           <p className="celsius">°C</p>
@@ -201,7 +208,7 @@ class Main extends Component {
                     </div>
                     <div className="forecast__day">
                       <p>Friday</p>
-                      <img src="img/sun_cloud.svg" className="margin--right" alt="sun-cloud" />
+                      <img src={sun_cloud} className="margin--right" alt="sun-cloud" />
                       <div className="t">
                         <div className="t">13
                           <p className="celsius">°C</p>
@@ -213,7 +220,7 @@ class Main extends Component {
                     </div>
                     <div className="forecast__day">
                       <p>Saturday</p>
-                      <img src="img/drops.svg" alt="rain" />
+                      <img src={drops} alt="rain" />
                       <div className="t">
                         <div className="t">10
                           <p className="celsius">°C</p>
@@ -225,7 +232,7 @@ class Main extends Component {
                     </div>
                     <div className="forecast__day">
                       <p>Sunday</p>
-                      <img src="img/thunder.svg" className="margin--right" alt="thunder" />
+                      <img src={thunder} className="margin--right" alt="thunder" />
                       <div className="t">
                         <div className="t">14
                           <p className="celsius">°C</p>
