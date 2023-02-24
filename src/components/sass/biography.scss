@@ -1,0 +1,40 @@
+.block {
+  text-align: center;
+}
+.flex {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+table {
+  margin-left:auto;
+  margin-right:auto;
+}
+.margin {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+input {
+  background: none;
+  border:none;
+  color: white;
+}
+input:focus {
+  outline: none;
+}
+.grey {
+  color: rgba(114, 113, 113, 0.5);
+}
+.grey:hover {
+  color: rgba(85, 84, 84, 0.884);
+  transition: all 0.3s ease-out;
+}
+tr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+th, td {
+  padding: 15px;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Biography from './Biography';
 
 import './sass/_base.scss';
 import './sass/_layout.scss';
@@ -84,6 +85,7 @@ class Main extends Component {
               temperatures of the day and hourly temperature for a location.
             </div>
           </div>
+          <Biography/>
           <div className="menu">
             <div className="dropdown__menu">
               <a href='/' className='city'><i className="fa-solid fa-location-dot"></i>&nbsp; Fortaleza &emsp; <i className="fa-solid fa-angle-down"></i></a>
