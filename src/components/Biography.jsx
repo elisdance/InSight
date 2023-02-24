@@ -93,6 +93,7 @@ class Biography extends Component {
     this.inputValue.current.value = '';
     this.setState({ data: updatedObject });
   };
+
   render() {
     const { data, headers } = this.state;
     return (
@@ -112,8 +113,9 @@ class Biography extends Component {
               <tr key={bio.id} >
                 {headers.map((header) => (
                   <td><input type="text" ref={this.inputValue} value={bio[header]} />
-                    <i class="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i></td>
+                    </td>
                 ))}
+                <i class="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i>
                 <i class="fa-solid fa-circle-check grey" key={headers.id} onClick={() => this.addToObject()}></i>
               </tr>
             ))}
