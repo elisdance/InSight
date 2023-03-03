@@ -6,6 +6,11 @@
   padding-top: 150px;
 }
 
+.city {
+  text-decoration: none;
+  color: #fff;
+}
+
 .dropdown {
   &__menu {
     position: relative;
@@ -32,4 +37,8 @@
 
 .dropdown__menu:hover .dropdown__content {
   display: block;
+}
+
+.notification {
+  cursor: pointer;
 }

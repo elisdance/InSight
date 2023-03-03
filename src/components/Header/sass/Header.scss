@@ -1,12 +1,13 @@
-.night{
-  background: #08244F; 
-  background: -webkit-linear-gradient(167deg, #08244F, #134CB5,#0B42AB); 
-  background: linear-gradient(167deg, #08244F, #134CB5,#0B42AB);
-}
-.day{
-  background: #29B2DD; 
-  background: -webkit-linear-gradient(167deg, #29B2DD, #33AADD,#2DC8EA);
-  background: linear-gradient(167deg, #29B2DD, #33AADD,#2DC8EA);
+.header {
+  padding-top: 100px;
+  &__description {
+    text-align: center;
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+  &__text {
+      font-size: 20px;
+  }
 }
 .title {
   display: flex;
@@ -18,12 +19,6 @@
 .content {
   position: relative;
 }
-
-.city {
-  text-decoration: none;
-  color: #fff;
-}
-
 .content h1 {
   color: #fff;
   font-size: 4em;
@@ -70,40 +65,13 @@
   }
 }
 
-.notification {
-  cursor: pointer;
-}
-
-.shadow {
-  text-shadow: -2px 3px 1px rgba(0, 0, 0, 0.1);
-}
-
-.focus {
-  background: rgba(37, 102, 163, 0.2);
-  border-radius: 20px;
-  border: 1px solid #8EBBFF;
-}
-
-.scroll {
-  overflow-y: auto;
-  max-height: 300px
-}
-
-.t {
-  display: flex;
-  gap: 5px;
-}
-
-.dark {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.margin {
-  &--left {
-    margin-left: -18px;
+@media screen and (max-width:560px) {
+  .header {
+    &__text {
+      font-size: 16px;
+    }
   }
-
-  &--right {
-    margin-right: -20px;
+  .content h1 {
+    font-size: 3rem;
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './sass/biography.scss';
+import './sass/Biography.scss';
 
 class Biography extends Component {
   constructor() {
@@ -20,9 +20,6 @@ class Biography extends Component {
       next_id: 10,
       sortBy: null,
     };
-    this.inputYear = React.createRef();
-    this.inputEvent = React.createRef();
-    this.inputHeader = React.createRef();
     this.inputValue = React.createRef();
   }
 
@@ -34,6 +31,7 @@ class Biography extends Component {
       else if (a[key] > b[key]) {
         return 1;
       }
+      return 0;
     });
     return (
       this.setState({
@@ -53,47 +51,46 @@ class Biography extends Component {
         }
       }
     }
-    this.setState({ data: data });
+    this.setState({ data })
   }
 
   addData = () => {
     const newData = {
       id: this.state.next_id,
-      year: parseInt(this.inputYear.current.value),
-      event: this.inputEvent.current.value
+      year: parseInt(this.state.year),
+      event: this.state.event
     }
-    const updatedData = [...this.state.data, newData];
-    this.setState({ data: updatedData });
-    this.setState({ next_id: this.state.next_id + 1 });
-    this.inputYear.current.value = '';
-    this.inputEvent.current.value = '';
+    this.setState(({ data }) => ({ data: [...data, newData] }));
+    this.setState({ next_id: this.state.next_id + 1});
   }
 
   deleteData = id => {
     const data = this.state.data.filter((item) => item.id !== id);
-    this.setState({ data: data });
+    this.setState({ data })
   }
   addHeader = (key) => {
-    const newHeader = this.inputHeader.current.value;
-    const updatedHeaders = [...this.state.headers, newHeader]
-    this.inputHeader.current.value = '';
+    const newHeader = this.state.header;
     const data = this.state.data;
     for (let i = 0; i < data.length; i++) {
       data[i][key] = '';
     }
-    this.setState({ headers: updatedHeaders, data: data })
+    this.setState(({ headers }) => ({ headers: [...headers, newHeader] }))
+    this.setState({ data });
   }
   deleteHeader = (id) => {
     const headers = this.state.headers.filter((item, index) => index !== id);
-    this.setState({ headers: headers });
+    this.setState({ headers });
   }
   addToObject = () => {
     const value = this.inputItemValue.current.value;
     const updatedObject = [...this.state.data, value];
     this.inputValue.current.value = '';
-    this.setState({ data: updatedObject });
+    this.setState(({ data }) => ({ data: [...data, updatedObject] }));
   };
-
+  handleChange(event) {
+    const {name,value} = event.target
+    this.setState({ [name]:value});
+  }
   render() {
     const { data, headers } = this.state;
     return (
@@ -113,7 +110,7 @@ class Biography extends Component {
               <tr key={bio.id} >
                 {headers.map((header) => (
                   <td><input type="text" ref={this.inputValue} value={bio[header]} />
-                    </td>
+                  </td>
                 ))}
                 <i class="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i>
                 <i class="fa-solid fa-circle-check grey" key={headers.id} onClick={() => this.addToObject()}></i>
@@ -122,12 +119,12 @@ class Biography extends Component {
           </tbody>
         </table>
         <div className='flex margin'>
-          <input type="text" ref={this.inputYear} placeholder="year:" />
-          <input type="text" ref={this.inputEvent} placeholder="event:" />
+          <input type="text"  placeholder="year:" name='year' value={this.state.year} onChange={(evt) => this.handleChange(evt)}/>
+          <input type="text" value={this.state.event} name='event' onChange={(evt) => this.handleChange(evt)} placeholder="event:" />
           <i class="fa-solid fa-circle-plus grey" onClick={this.addData}></i>
         </div>
         <div className='flex margin'>
-          <input type="text" ref={this.inputHeader} placeholder="name of header:" />
+          <input type="text" placeholder="name of header:" value={this.state.header} name='header' onChange={(evt) => this.handleChange(evt)}/>
           <i class="fa-solid fa-circle-plus grey" onClick={this.addHeader}></i>
 
         </div>

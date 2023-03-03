@@ -1,0 +1,18 @@
+.humidity {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba($color: #001026, $alpha: 0.3);
+  max-width: 345px;
+  padding: 7px 20px 7px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  align-items: center;
+  margin: 30px auto;
+
+  &__option {
+    align-items: center;
+    gap: 5px;
+    display: flex;
+  }
+}

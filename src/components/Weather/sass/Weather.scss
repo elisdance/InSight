@@ -1,0 +1,57 @@
+.weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+
+  &__block {
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 500px;
+  }
+}
+
+
+.temperature {
+  &--h2 {
+    font-size: 64px;
+    margin: 0;
+  }
+
+  &--h3 {
+    font-size: 20px;
+  }
+
+  &--h4 {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width:560px) {
+  .temperature {
+    &--h2 {
+      font-size: 48px;
+      margin: 0;
+    }
+  }
+
+  .forecast__image {
+    width: 20vw;
+  }
+
+  .weather__image {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width:360px) {
+  .humidity {
+    width: 250px;
+  }
+}
