@@ -8,6 +8,7 @@ import forecast3 from '../../assets/images/forecast3.svg';
 import sun_cloud from '../../assets/images/sun_cloud.svg';
 import tornado from '../../assets/images/tornado.svg';
 import thunder from '../../assets/images/thunder.svg';
+import { DateTime } from 'luxon';
 import './sass/Forecast.scss';
 
 class Forecast extends Component {
@@ -19,17 +20,15 @@ class Forecast extends Component {
     }
   }
   getDate() {
-    const { DateTime } = require("luxon");
     let date = DateTime.now().toFormat('LLL dd')
     this.setState({
       date: date
     })
   }
   getHours() {
-    const { DateTime } = require("luxon");
     let hour = DateTime.now().toObject().hour;
     let text = document.getElementsByClassName('time');
-    [...text].forEach.call(text, function (el) {
+    [...text].forEach((el)=> {
       el.innerText = hour + '.00';
       hour += 1;
       hour %= 24;

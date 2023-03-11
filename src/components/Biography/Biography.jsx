@@ -17,10 +17,16 @@ class Biography extends Component {
         { id: 8, year: 2014, event: 'Charitable work' },
         { id: 9, year: 2012, event: 'Universal flu vaccine' }
       ],
+      activeList: '',
       next_id: 10,
       sortBy: null,
+      activeItem: null,
+      isActive: '',
+      isLoaded: false,
+      isError: false,
     };
     this.inputValue = React.createRef();
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSort = (key) => {
@@ -61,7 +67,7 @@ class Biography extends Component {
       event: this.state.event
     }
     this.setState(({ data }) => ({ data: [...data, newData] }));
-    this.setState({ next_id: this.state.next_id + 1});
+    this.setState({ next_id: this.state.next_id + 1 });
   }
 
   deleteData = id => {
@@ -82,21 +88,72 @@ class Biography extends Component {
     this.setState({ headers });
   }
   addToObject = () => {
-    const value = this.inputItemValue.current.value;
+    const value = this.inputValue.current.value;
     const updatedObject = [...this.state.data, value];
     this.inputValue.current.value = '';
     this.setState(({ data }) => ({ data: [...data, updatedObject] }));
   };
   handleChange(event) {
-    const {name,value} = event.target
-    this.setState({ [name]:value});
+    const { name, value } = event.target
+    this.setState({ [name]: value });
   }
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyDown);
+  }
+
+  handleKeyDown = (event) => {
+    let newActiveList = this.state.activeList;
+
+    if (event.keyCode === 38) {
+      newActiveList = 'active';
+      event.preventDefault();
+    } else if (event.keyCode === 40) {
+      newActiveList = '';
+      event.preventDefault();
+    }
+  
+    this.setState({ activeList: newActiveList });
+  };
+  handleClick = (index) => {
+    let newActiveItem, newIsActive;
+  
+    if (index === this.state.activeItem) {
+      newActiveItem = null;
+      newIsActive = '';
+    } else {
+      newActiveItem = index;
+      newIsActive = 'active';
+    }
+    this.setState({ activeItem: newActiveItem, isActive: newIsActive });
+  }
+  onDragStart= (event, id) => {
+
+    event.dataTransfer.setData('drag', id);
+  }
+  onDragOver = (event) => {
+    event.preventDefault();
+  }
+  onDrop = (event, id) => {
+    event.preventDefault();
+    const dragIndex = this.state.data.findIndex((item) => item.id === event.dataTransfer.getData('drag', id));
+    const dropIndex = this.state.data.findIndex((item) => item.id === id);
+    const newData = [...this.state.data];
+    const draggedItem = newData[dragIndex];
+    newData.splice(dragIndex, 1);
+    newData.splice(dropIndex,0,draggedItem);
+    this.setState({ data: newData });
+  }
+
   render() {
     const { data, headers } = this.state;
     return (
       <div className='block'>
         <h2>Bill Gates' Life Events</h2>
-        <table>
+        <table className={this.state.activeList}>
           <thead>
             <tr>
               {headers.map((header, index) => (
@@ -105,27 +162,36 @@ class Biography extends Component {
 
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             {data.map((bio) => (
-              <tr key={bio.id} >
-                {headers.map((header) => (
-                  <td><input type="text" ref={this.inputValue} value={bio[header]} />
+              <tr
+                key={bio.id}
+                className={this.state.isActive}
+                onClick={() => this.handleClick(bio.id)}
+                draggable={true}
+                onDragStart={(event) => this.onDragStart(event, bio.id)}
+                onDragOver={(event) => this.onDragOver(event)}
+                onDrop={(event) => this.onDrop(event, bio.id)}
+              >
+                {headers.map((header,index) => (
+                  <td key={index}><input type="text" ref={this.inputValue} id={bio.id} defaultValue={bio[header] || ''} />
                   </td>
                 ))}
-                <i class="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i>
-                <i class="fa-solid fa-circle-check grey" key={headers.id} onClick={() => this.addToObject()}></i>
+                <th><i className="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i>
+                <i className="fa-solid fa-circle-check grey" key={headers.id} onClick={() => this.addToObject()}></i></th>
+                
               </tr>
             ))}
           </tbody>
         </table>
         <div className='flex margin'>
-          <input type="text"  placeholder="year:" name='year' value={this.state.year} onChange={(evt) => this.handleChange(evt)}/>
-          <input type="text" value={this.state.event} name='event' onChange={(evt) => this.handleChange(evt)} placeholder="event:" />
-          <i class="fa-solid fa-circle-plus grey" onClick={this.addData}></i>
+          <input type="text" placeholder="year:" name='year' value={this.state.year || ''} onChange={this.handleChange}/>
+          <input type="text" value={this.state.event || ''} name='event' onChange={this.handleChange} placeholder="event:" />
+          <i className="fa-solid fa-circle-plus grey" onClick={this.addData}></i>
         </div>
         <div className='flex margin'>
-          <input type="text" placeholder="name of header:" value={this.state.header} name='header' onChange={(evt) => this.handleChange(evt)}/>
-          <i class="fa-solid fa-circle-plus grey" onClick={this.addHeader}></i>
+          <input type="text" placeholder="name of header:" value={this.state.header || ''} name='header' onChange={this.handleChange} />
+          <i className="fa-solid fa-circle-plus grey" onClick={this.addHeader}></i>
 
         </div>
       </div>

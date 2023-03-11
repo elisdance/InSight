@@ -6,10 +6,26 @@ import wind_sm from '../../assets/images/wind_sm.svg';
 import './sass/WeatherBlock.scss';
 
 class WeatherBlock extends Component {
+  constructor() {
+    super();
+    this.state = {
+        isLoaded: false,
+        isError: false,
+    }
+  }
+  imageLoad= () => {
+    console.log("Image loaded successfully");
+    this.setState({isLoaded:true});
+  }
+  imageError= ()=> {
+    console.log("Error loading image");
+    this.setState({isError:true});
+  }
   render() {
     return (
       <div className="weather__block">
-        <img src={suncloud} className="weather__image" alt="sun-cloud" />
+        <img src={suncloud} onLoad={this.imageLoad}
+          onError={this.imageError} className="weather__image" alt="sun-cloud" />
         <h2 className="temperature--h2">28°</h2>
         <h4 className="temperature--h4">Precipitations <br />
           Max.: 31° Min.: 25°</h4>

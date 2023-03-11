@@ -16,7 +16,6 @@ class Main extends Component {
   handleTime = () => {
     const { DateTime } = require("luxon");
     let hours = DateTime.now().toObject().hour;
-    console.log(hours);
     const THEME = {
       LIGHT: 'day',
       DARK: 'night'
