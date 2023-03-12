@@ -139,7 +139,7 @@ class Biography extends Component {
   }
   onDrop = (event, id) => {
     event.preventDefault();
-    const dragIndex = this.state.data.findIndex((item) => item.id === event.dataTransfer.getData('drag', id));
+    const dragIndex = this.state.data.findIndex((item) => item.id == event.dataTransfer.getData('drag', id));
     const dropIndex = this.state.data.findIndex((item) => item.id === id);
     const newData = [...this.state.data];
     const draggedItem = newData[dragIndex];
@@ -147,7 +147,6 @@ class Biography extends Component {
     newData.splice(dropIndex,0,draggedItem);
     this.setState({ data: newData });
   }
-
   render() {
     const { data, headers } = this.state;
     return (
