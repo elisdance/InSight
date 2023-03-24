@@ -5,7 +5,7 @@ class Biography extends Component {
   constructor() {
     super();
     this.state = {
-      headers: [],
+      headers: ['year', 'event'],
       data: [
         { id: 1, year: 1955, event: 'Year of birth' },
         { id: 2, year: 1975, event: 'Founded Microsoft' },
@@ -26,7 +26,6 @@ class Biography extends Component {
       isError: false,
     };
     this.inputValue = React.createRef();
-    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSort = (key) => {
@@ -80,8 +79,7 @@ class Biography extends Component {
     for (let i = 0; i < data.length; i++) {
       data[i][key] = '';
     }
-    this.setState(({ headers }) => ({ headers: [...headers, newHeader] }))
-    this.setState({ data });
+    this.setState(({ headers }) => ({ headers: [...headers, newHeader], data }));
   }
   deleteHeader = (id) => {
     const headers = this.state.headers.filter((item, index) => index !== id);
@@ -93,7 +91,7 @@ class Biography extends Component {
     this.inputValue.current.value = '';
     this.setState(({ data }) => ({ data: [...data, updatedObject] }));
   };
-  handleChange(event) {
+  handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value });
   }
@@ -115,12 +113,12 @@ class Biography extends Component {
       newActiveList = '';
       event.preventDefault();
     }
-  
+
     this.setState({ activeList: newActiveList });
   };
   handleClick = (index) => {
     let newActiveItem, newIsActive;
-  
+
     if (index === this.state.activeItem) {
       newActiveItem = null;
       newIsActive = '';
@@ -130,8 +128,7 @@ class Biography extends Component {
     }
     this.setState({ activeItem: newActiveItem, isActive: newIsActive });
   }
-  onDragStart= (event, id) => {
-
+  onDragStart = (event, id) => {
     event.dataTransfer.setData('drag', id);
   }
   onDragOver = (event) => {
@@ -144,7 +141,7 @@ class Biography extends Component {
     const newData = [...this.state.data];
     const draggedItem = newData[dragIndex];
     newData.splice(dragIndex, 1);
-    newData.splice(dropIndex,0,draggedItem);
+    newData.splice(dropIndex, 0, draggedItem);
     this.setState({ data: newData });
   }
   render() {
@@ -172,19 +169,18 @@ class Biography extends Component {
                 onDragOver={(event) => this.onDragOver(event)}
                 onDrop={(event) => this.onDrop(event, bio.id)}
               >
-                {headers.map((header,index) => (
+                {headers.map((header, index) => (
                   <td key={index}><input type="text" ref={this.inputValue} id={bio.id} defaultValue={bio[header] || ''} />
                   </td>
                 ))}
                 <th><i className="fa-solid fa-trash grey" onClick={() => this.deleteData(bio.id)}></i>
-                <i className="fa-solid fa-circle-check grey" key={headers.id} onClick={() => this.addToObject()}></i></th>
-                
+                  <i className="fa-solid fa-circle-check grey" onClick={() => this.addToObject()}></i></th>
               </tr>
             ))}
           </tbody>
         </table>
         <div className='flex margin'>
-          <input type="text" placeholder="year:" name='year' value={this.state.year || ''} onChange={this.handleChange}/>
+          <input type="text" placeholder="year:" name='year' value={this.state.year || ''} onChange={this.handleChange} />
           <input type="text" value={this.state.event || ''} name='event' onChange={this.handleChange} placeholder="event:" />
           <i className="fa-solid fa-circle-plus grey" onClick={this.addData}></i>
         </div>
