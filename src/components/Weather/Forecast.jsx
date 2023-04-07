@@ -20,7 +20,7 @@ function WeatherComponent(props) {
           <div className="forecast__hours">
             {temperatures.map((item, index) => {
               return (
-                <div className={index === 0 ? 'focus' : ''} key={index}>
+                <div className={index === 0 ? 'focus' : ''} >
                   <ForecastHour
                     src={forecast2}
                     image='sun-cloud'
@@ -40,11 +40,10 @@ function WeatherComponent(props) {
             <h4 className="temperature--h4"><i className="fa-regular fa-calendar"></i></h4>
           </div>
           <div className="forecast__days scroll">
-            {dailyData.map((day,index)=> 
+            {dailyData.map((day)=> 
             <ForecastDay
               src={drops}
               image='rain'
-              key={index}
               day={day.day}
               temperature_day={day.temperature_day}
               temperature_night={day.temperature_night}
