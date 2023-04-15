@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import Biography from '../Biography/Biography';
+import React from 'react';
 import Menu from '../Menu/Menu';
 import './sass/Header.scss';
 
 
-class Header extends Component {
-  render() {
+function Header (){
     return (
       <div className="header">
         <div className="title">
@@ -23,11 +21,9 @@ class Header extends Component {
             temperatures of the day and hourly temperature for a location.
           </div>
         </div>
-        <Biography />
         <Menu/>
       </div>
     )
-  }
 }
 
 export default Header;

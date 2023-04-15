@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-class ForecastDay extends Component {
-  render () {
-    const {src,image,day,temperature_day,temperature_night,className} = this.props;
+function ForecastDay ({src,image,day,temperature_day,temperature_night,className}) {
     return (
       <div className="forecast__day">
       <p>{day}</p>
@@ -17,7 +15,6 @@ class ForecastDay extends Component {
       </div>
     </div>
     )
-  }
 }
 
 export default ForecastDay;

@@ -8,7 +8,6 @@ import withWeatherData from './components/withWeatherData';
 
 function WeatherComponent(props) {
   const { date, temperatures, hours, dailyData } = props;
-
   return (
     <div className="weather__block">
       <div className="block__detail">
