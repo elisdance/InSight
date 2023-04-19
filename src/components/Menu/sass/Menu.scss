@@ -5,7 +5,10 @@
   margin-right: 7%;
   padding-top: 150px;
 }
-
+.icons {
+  display:flex;
+  gap:15px;
+}
 .city {
   text-decoration: none;
   color: #fff;

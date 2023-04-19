@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 function ForecastDay ({src,image,day,temperature_day,temperature_night,className}) {
     return (

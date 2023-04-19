@@ -8,7 +8,6 @@ import './sass/WeatherBlock.scss';
 const WeatherBlock = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [temperature, setTemperature] = useState('');
   const [temp_min, setTempMin] = useState('');
@@ -37,9 +36,9 @@ const WeatherBlock = () => {
           const data = await response.json();
           setWeatherData(data);
           setIsLoaded(true);
-          setTemperature(data.main.temp);
-          setTempMin(data.main.temp_min);
-          setTempMax(data.main.temp_max);
+          setTemperature(Math.round(data.main.temp));
+          setTempMin(Math.round(data.main.temp_min));
+          setTempMax(Math.round(data.main.temp_max));
           setFeelsLike(Math.round(data.main.feels_like));
           setHumidity(data.main.humidity);
           setWindSpeed(Math.round(data.wind.speed));

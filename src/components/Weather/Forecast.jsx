@@ -4,16 +4,19 @@ import ForecastHour from './components/ForecastHour';
 import drops from '../../assets/images/drops.svg';
 import forecast2 from '../../assets/images/forecast2.svg';
 import './sass/Forecast.scss';
+import i18n from "../../i18n/index";
 import withWeatherData from './components/withWeatherData';
+import { useTranslation } from 'react-i18next';
 
 function WeatherComponent(props) {
   const { date, temperatures, hours, dailyData } = props;
+  const {t} = useTranslation();
   return (
     <div className="weather__block">
       <div className="block__detail">
         <div className="forecast">
           <div className="forecast__date">
-            <h3 className="temperature--h3">Today</h3>
+            <h3 className="temperature--h3" >{t('today')}</h3>
             <h4 className="temperature--h4" id="date">{date}</h4>
           </div>
           <div className="forecast__hours">
