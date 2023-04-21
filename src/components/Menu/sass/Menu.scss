@@ -9,6 +9,14 @@
   display:flex;
   gap:15px;
 }
+select {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+select:focus {
+  outline:none;
+}
 .city {
   text-decoration: none;
   color: #fff;

@@ -1,6 +1,5 @@
 {
-    "enTranslations": {
-        "today": "Today",
-        "next": "Next Forecast"
-    }
+  "today": "Today",
+  "next": "Next Forecast",
+  "precipitations":"Precipitations"
 }

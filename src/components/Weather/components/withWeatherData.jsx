@@ -5,10 +5,10 @@ const withWeatherData = WrappedComponent => {
   return function WithWeatherData(props) {
     const [date, setDate] = useState('');
     const [hours, setHours] = useState([]);
-    const [formattedWeatherData, setFormattedWeatherData] = useState(null);
+    const [formattedWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [city, setCity] = useState('');
+    const [city] = useState('');
     const [temperatures, setTemperatures] = useState([]);
     const [dailyData, setDailyData] = useState([]);
 

@@ -3,6 +3,7 @@ import rain_sm from '../../assets/images/rain_sm.svg';
 import suncloud from '../../assets/images/suncloud.svg';
 import temp_sm from '../../assets/images/temp_sm.svg';
 import wind_sm from '../../assets/images/wind_sm.svg';
+import { useTranslation } from 'react-i18next';
 import './sass/WeatherBlock.scss';
 
 const WeatherBlock = () => {
@@ -59,7 +60,7 @@ const WeatherBlock = () => {
     console.log("Error loading image");
     setIsError(true);
   }
-
+const {t} = useTranslation();
   if (isError) {
     return <div className="weather__block"><iframe src="https://giphy.com/embed/KJvOSHdFkoacp5qkg8" width="350" height="350" frameBorder="0" className="giphy-embed" allowFullScreen></iframe></div>;
   }
@@ -67,12 +68,12 @@ const WeatherBlock = () => {
   if (!isLoaded) {
     return <div className="weather__block"><iframe src="https://giphy.com/embed/QKUx6kHItu3ilaVMdn" width="350" frameBorder="0" className="giphy-embed" allowFullScreen></iframe></div>;
   }
-
+  
   return (
     <div className="weather__block">
       <img src={suncloud} className="weather__image" alt="sun-cloud" onLoad={imageLoad} />
       <h2 className="temperature--h2">{temperature}&deg;</h2>
-      <h4 className="temperature--h4">Precipitations <br />
+      <h4 className="temperature--h4">{t('precipitations')} <br />
         Max: {temp_max}° Min: {temp_min}°</h4>
       <div className="humidity">
         <div className="humidity__option">
