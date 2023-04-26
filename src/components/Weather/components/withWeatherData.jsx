@@ -15,7 +15,7 @@ const withWeatherData = WrappedComponent => {
     function getDate() {
       const date = DateTime.now().toFormat('LLL dd');
       setDate(date);
-    } const dailyData = weatherData.list.reduce((acc, item) => {
+    } const dailyData = weatherData?.list?.reduce((acc, item) => {
       const day = new Date(item.dt_txt).toLocaleString('en-us', { weekday: 'long' });
       const temperature_day = Math.round(item.main.temp_max);
       const temperature_night = Math.round(item.main.temp_min);
@@ -31,7 +31,7 @@ const withWeatherData = WrappedComponent => {
         }
       }
       return acc;
-    }, []);
+    }, []) || [];
     const hour = DateTime.now().toObject().hour;
     const hours = Array.from({ length: 4 }, (_, i) => {
       const hourMod = (hour + i) % 24;

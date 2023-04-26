@@ -15,7 +15,7 @@ export const fetchWeather = createAsyncThunk('fetchWeather', async () => {
 const hoursSlice = createSlice({
   name: 'hours',
   initialState: {
-    weatherHours:'',
+    weatherHours:{},
     temperatures: [],
   },
   extraReducers: (builder) => {
