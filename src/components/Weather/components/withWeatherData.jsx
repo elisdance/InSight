@@ -8,7 +8,6 @@ const withWeatherData = WrappedComponent => {
     const [formattedWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [city] = useState('');
     const [temperatures, setTemperatures] = useState([]);
     const [dailyData, setDailyData] = useState([]);
 
@@ -81,7 +80,6 @@ const withWeatherData = WrappedComponent => {
         formattedWeatherData={formattedWeatherData}
         loading={loading}
         error={error}
-        city={city}
         temperatures={temperatures}
         dailyData={dailyData}
         {...props}
