@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchWeather = createAsyncThunk('fetchWeather', async () => {
+export const fetchHours = createAsyncThunk('fetchHours', async () => {
   const position = await new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
@@ -19,7 +19,7 @@ const hoursSlice = createSlice({
     temperatures: [],
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchWeather.fulfilled, (state, action) => {
+    builder.addCase(fetchHours.fulfilled, (state, action) => {
       state.weatherHours = action.payload.weatherHours
       state.temperatures = action.payload.weatherHours.list.slice(0, 4).map(item => Math.round(item.main.temp));
     });

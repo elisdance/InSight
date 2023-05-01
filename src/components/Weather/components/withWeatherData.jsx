@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeather } from '../../../store/weather_hours';
+import { fetchHours } from '../../../store/weather_hours';
 import { DateTime } from 'luxon';
 
 const withWeatherData = WrappedComponent => {
@@ -8,7 +8,6 @@ const withWeatherData = WrappedComponent => {
     const [date, setDate] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [temperatures, setTemperatures] = useState([]);
     const dispatch = useDispatch();
     const selectWeatherData = (state) => state.hours.weatherHours;
     const weatherData = useSelector(selectWeatherData)
@@ -37,11 +36,10 @@ const withWeatherData = WrappedComponent => {
       const hourMod = (hour + i) % 24;
       return `${hourMod}.00`;
     })
-
-
+    const temperatures = weatherData.list.slice(0, 4).map(item => Math.round(item.main.temp));
     useEffect(() => {
       getDate();
-      dispatch(fetchWeather()).then(() => setLoading(false));
+      dispatch(fetchHours()).then(() => setLoading(false));
     }, [dispatch]);
 
     return (
