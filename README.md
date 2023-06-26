@@ -1,6 +1,6 @@
 # InSight
 
-https://elisdance.github.io/InSight/
+
 
 ## Description 
 This app provides accurate weather information
